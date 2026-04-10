@@ -43,6 +43,10 @@ A comprehensive Discord bot with welcome features, moderation commands, honeypot
 - `/picture` - Shows the bot's avatar
 - `/picture generate` - Generates a random image with shapes
 
+### 🛠️ Utility Commands
+- `/ping` - Check bot latency and response time
+- `/testwelcome` - Test the welcome message format
+
 ## Setup Instructions
 
 ### 1. Prerequisites
@@ -143,6 +147,10 @@ SPAM_TIMEOUT = 10  # Seconds
 ### Picture Commands
 - `/picture` - Display the bot's avatar
 - `/picture generate` - Generate a random colorful image
+
+### Utility Commands
+- `/ping` - Check bot latency and response time
+- `/testwelcome` - Test the welcome message format
 
 ## Features in Detail
 
