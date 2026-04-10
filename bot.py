@@ -439,6 +439,23 @@ async def command_error(interaction: discord.Interaction, error):
     else:
         await interaction.response.send_message(f"An error occurred: {str(error)}", ephemeral=True)
 
+# Test command
+@bot.tree.command(name="test", description="Test command to verify bot is working")
+async def test(interaction: discord.Interaction):
+    embed = discord.Embed(
+        title="✅ Bot Test Successful",
+        description="PixelGuard is working correctly!",
+        color=Config.BOT_COLOR
+    )
+    embed.add_field(name="Bot Name", value=bot.user.name, inline=True)
+    embed.add_field(name="Bot ID", value=bot.user.id, inline=True)
+    embed.add_field(name="Server", value=interaction.guild.name, inline=True)
+    embed.add_field(name="Latency", value=f"{round(bot.latency * 1000)}ms", inline=True)
+    embed.set_thumbnail(url=bot.user.display_avatar.url)
+    embed.set_footer(text="PixelGuard - Your Server Guardian")
+    
+    await interaction.response.send_message(embed=embed)
+
 # Run the bot
 if __name__ == "__main__":
     if not Config.DISCORD_TOKEN:
