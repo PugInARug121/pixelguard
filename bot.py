@@ -439,20 +439,41 @@ async def command_error(interaction: discord.Interaction, error):
     else:
         await interaction.response.send_message(f"An error occurred: {str(error)}", ephemeral=True)
 
-# Test command
-@bot.tree.command(name="test", description="Test command to verify bot is working")
-async def test(interaction: discord.Interaction):
+# Ping command
+@bot.tree.command(name="ping", description="Check bot latency and response time")
+async def ping(interaction: discord.Interaction):
+    start_time = time.time()
+    await interaction.response.defer()
+    end_time = time.time()
+    
+    api_latency = round((end_time - start_time) * 1000)
+    websocket_latency = round(bot.latency * 1000)
+    
     embed = discord.Embed(
-        title="✅ Bot Test Successful",
-        description="PixelGuard is working correctly!",
+        title="🏓 Pong!",
+        description="PixelGuard latency information",
         color=Config.BOT_COLOR
     )
-    embed.add_field(name="Bot Name", value=bot.user.name, inline=True)
-    embed.add_field(name="Bot ID", value=bot.user.id, inline=True)
-    embed.add_field(name="Server", value=interaction.guild.name, inline=True)
-    embed.add_field(name="Latency", value=f"{round(bot.latency * 1000)}ms", inline=True)
+    embed.add_field(name="API Latency", value=f"{api_latency}ms", inline=True)
+    embed.add_field(name="WebSocket Latency", value=f"{websocket_latency}ms", inline=True)
+    embed.add_field(name="Status", value="🟢 Online", inline=True)
     embed.set_thumbnail(url=bot.user.display_avatar.url)
     embed.set_footer(text="PixelGuard - Your Server Guardian")
+    
+    await interaction.followup.send(embed=embed)
+
+# Test welcome command
+@bot.tree.command(name="testwelcome", description="Test the welcome message format")
+async def testwelcome(interaction: discord.Interaction):
+    embed = discord.Embed(
+        title="Welcome to the Server!",
+        description=f"Welcome {interaction.user.mention} to {interaction.guild.name}! 🎉",
+        color=Config.BOT_COLOR
+    )
+    embed.set_thumbnail(url=interaction.user.display_avatar.url)
+    embed.add_field(name="Account Created", value=interaction.user.created_at.strftime("%Y-%m-%d"), inline=True)
+    embed.add_field(name="Member Count", value=interaction.guild.member_count, inline=True)
+    embed.set_footer(text="Please read the rules and enjoy your stay!")
     
     await interaction.response.send_message(embed=embed)
 
