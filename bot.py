@@ -13,6 +13,7 @@ from config import Config
 
 class ModerationBot(commands.Bot):
     def __init__(self):
+        # PixelGuard Discord Bot - Version 1.0.1
         intents = discord.Intents.default()
         intents.guilds = True
         intents.members = True
