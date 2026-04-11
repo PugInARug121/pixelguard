@@ -13,7 +13,8 @@ from config import Config
 
 class ModerationBot(commands.Bot):
     def __init__(self):
-        # PixelGuard Discord Bot - Version 1.0.1
+        # PixelGuard Discord Bot - Version 1.0.2
+        # Testing GitHub webhook integration
         intents = discord.Intents.default()
         intents.guilds = True
         intents.members = True
